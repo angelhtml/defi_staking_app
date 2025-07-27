@@ -1,4 +1,4 @@
-pragma solidity ^0.8.0;
+pragma solidity ^0.5.0;
 
 contract Migrations {
     address public owner;
@@ -8,16 +8,16 @@ contract Migrations {
         owner = msg.sender;
     }
 
-    modifier restricted(){
-        if(msg.sender == owner) _;
+    modifier restricted() {
+        if (msg.sender == owner) _;
     }
 
-    function SetComplated(uint complated) public restricted {
-        last_complated_migration = complated;
+    function setCompleted(uint completed) public restricted {
+        last_complated_migration = completed;
     }
 
-    function Upgrade(address new_address) public restricted {
+    function upgrade(address new_address) public restricted {
         Migrations upgraded = Migrations(new_address);
-        upgraded.SetComplated(last_complated_migration);
+        upgraded.setCompleted(last_complated_migration);
     }
 }
